@@ -27,6 +27,10 @@ class ListingController extends GetxController with StateMixin {
     super.onReady();
   }
 
+   name (){
+
+   }
+
   @override
   void onClose() {}
   void increment() => count.value++;

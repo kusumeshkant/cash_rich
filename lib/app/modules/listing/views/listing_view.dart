@@ -7,6 +7,7 @@ import '../controllers/listing_controller.dart';
 
 class ListingView extends GetView<ListingController> {
   String? any;
+  int? counts;
 
    ListingView({Key? key}) : super(key: key);
 
@@ -52,8 +53,8 @@ class ListingView extends GetView<ListingController> {
                     ),
                   ),
                 ),
-                const Text(
-                  "Count: 5",
+                 Text(
+                  "Count: 3 ",
                   style: TextStyle(fontSize: 14, color: Colors.grey),
                 )
               ],
@@ -71,6 +72,7 @@ class ListingView extends GetView<ListingController> {
                         any = index == 0? 'BTC': index == 1 ? 'ETH': 'LTC';
                         return GestureDetector(
                           onTap: () {
+                            any = index == 0? 'BTC': index == 1 ? 'ETH': 'LTC';
                             Get.bottomSheet(
                               Container(
                                 padding:
@@ -86,9 +88,9 @@ class ListingView extends GetView<ListingController> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Center(
+                                     Center(
                                         child: Text(
-                                      'Bit Coin',
+                                          '${enq['data'][any]['name']}',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -214,8 +216,8 @@ class ListingView extends GetView<ListingController> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    const Text(
-                                      '15-03-2022  3:30 pm',
+                                     Text(
+                                        '${enq['data'][any]['last_updated']}',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.green),
                                     ),
@@ -223,7 +225,9 @@ class ListingView extends GetView<ListingController> {
                                       height: 30,
                                     ),
                                     GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
                                       child: Container(
                                         alignment: Alignment.center,
                                         height:
@@ -253,7 +257,7 @@ class ListingView extends GetView<ListingController> {
                           child: Container(
                             margin: const EdgeInsets.only(top: 15),
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            height: MediaQuery.of(context).size.height * .1,
+                            height: MediaQuery.of(context).size.height * .12,
                             width: MediaQuery.of(context).size.width * .95,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -332,9 +336,9 @@ class ListingView extends GetView<ListingController> {
                                       alignment: Alignment.center,
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              .05,
+                                              .07,
                                       width: MediaQuery.of(context).size.width *
-                                          .2,
+                                          .25,
                                       //color: Colors.red,
                                       child:  Text(
                                         "Price \$${enq['data'][any]['quote']['USD']['price']}",
