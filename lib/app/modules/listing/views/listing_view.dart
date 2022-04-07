@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import '../controllers/listing_controller.dart';
 
 class ListingView extends GetView<ListingController> {
-  const ListingView({Key? key}) : super(key: key);
+  String? any;
+
+   ListingView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class ListingView extends GetView<ListingController> {
                   return ListView.builder(
                       itemCount: enq['data'].length,
                       itemBuilder: (context, index) {
+                        any = index == 0? 'BTC': index == 1 ? 'ETH': 'LTC';
                         return GestureDetector(
                           onTap: () {
                             Get.bottomSheet(
@@ -263,7 +266,7 @@ class ListingView extends GetView<ListingController> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${enq[index]['BTC']['name']}',
+                                      '${enq['data'][any]['name']}',
                                       style: const TextStyle(
                                           fontSize: 20, color: Colors.yellow),
                                     ),
@@ -274,9 +277,9 @@ class ListingView extends GetView<ListingController> {
                                       width: MediaQuery.of(context).size.width *
                                           .4,
                                       child: Row(
-                                        children: const [
+                                        children:  [
                                           SizedBox(
-                                            width: 15,
+                                            width: 25,
                                           ),
                                           Icon(
                                             Icons.arrow_upward,
@@ -286,7 +289,7 @@ class ListingView extends GetView<ListingController> {
                                             width: 7,
                                           ),
                                           Text(
-                                            'Show Chart',
+                                            '${enq['data'][any]['quote']['USD']['percent_change_60d']}'.toString(),
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.grey),
@@ -311,9 +314,9 @@ class ListingView extends GetView<ListingController> {
                                               BorderRadius.circular(10),
                                           color: Colors.grey[800],
                                         ),
-                                        child: const Text(
-                                          'ADA',
-                                          style: TextStyle(
+                                        child:  Text(
+                                          '${enq['data'][any]['symbol']}',
+                                          style: const TextStyle(
                                             fontSize: 15,
                                           ),
                                         ),
@@ -333,8 +336,8 @@ class ListingView extends GetView<ListingController> {
                                       width: MediaQuery.of(context).size.width *
                                           .2,
                                       //color: Colors.red,
-                                      child: const Text(
-                                        "Price   \$108",
+                                      child:  Text(
+                                        "Price \$${enq['data'][any]['quote']['USD']['price']}",
                                         style: TextStyle(
                                             fontSize: 15, color: Colors.grey),
                                       ),
@@ -347,8 +350,8 @@ class ListingView extends GetView<ListingController> {
                                       width: MediaQuery.of(context).size.width *
                                           .2,
                                       //color: Colors.red,
-                                      child: const Text(
-                                        "Price     108",
+                                      child:  Text(
+                                        "Rank     ${enq['data'][any]['cmc_rank']}",
                                         style:  TextStyle(
                                             fontSize: 15, color: Colors.grey),
                                       ),
